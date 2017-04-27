@@ -2,6 +2,15 @@
 module Print3Flipped where
 
 import Text.Read
+import Data.Char
+
+shout :: String -> String
+shout xs = map toUpper xs
+
+writeShout :: IO ()
+writeShout = do
+    putStrLn "Enter a string: "
+    fmap shout getLine >>= putStrLn
 
 themselvesTimes :: [Int] -> [Int]
 themselvesTimes xs = xs >>= (\x -> replicate x x)
@@ -39,7 +48,7 @@ theThird :: String -> Char
 theThird xs = xs !! 2
 
 nthLetter :: Int -> Char
-nthLetter x = "holy fucking shit" !! x
+nthLetter x = "fucking shit" !! x
 
 stupid :: String -> String
 stupid xs = concat [three, two, one]

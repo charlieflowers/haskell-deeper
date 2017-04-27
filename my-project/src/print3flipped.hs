@@ -4,6 +4,31 @@ module Print3Flipped where
 import Text.Read
 import Data.Char
 
+fiveGetLines = replicate 5 getLine
+
+shoutFold :: IO String -> [IO String] -> [IO String]
+shoutFold newValue acc = (fmap shout (newValue)) : acc
+
+shoutFiveLines :: [IO String]
+shoutFiveLines = foldr shoutFold [] fiveGetLines
+
+foldFn :: String -> [String] -> [String]
+foldFn newValue acc = newValue:acc
+
+testFold :: [String] -> [String]
+testFold xs = foldr foldFn [] xs
+
+testResult = testFold ["Can", "you", "save", "my", "heavy", "dirty", "soul"]
+
+-- ioFoldFn :: (IO String -> [String] -> [String])
+-- ioFoldFn newValue acc = newValue >>= (\x -> x:acc) 
+
+-- fiveGetLines :: [String]
+-- fiveGetLines = let
+--     five = replicate 5 getLine
+--     in
+--         foldr ioFoldFn [] five 
+
 shout :: String -> String
 shout xs = map toUpper xs
 

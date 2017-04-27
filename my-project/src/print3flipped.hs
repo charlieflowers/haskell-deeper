@@ -3,6 +3,9 @@ module Print3Flipped where
 
 import Text.Read
 
+themselvesTimes :: [Int] -> [Int]
+themselvesTimes xs = xs >>= (\x -> replicate x x)
+
 interactiveSumming :: IO ()
 interactiveSumming = do
     putStrLn "Enter first number: "

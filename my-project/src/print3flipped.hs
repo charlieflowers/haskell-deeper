@@ -4,6 +4,16 @@ module Print3Flipped where
 import Text.Read
 import Data.Char
 
+isGetLineLongerThan4 :: IO Bool
+isGetLineLongerThan4 = getLine >>= 
+                        \x -> return $ length x > 4
+
+myWhile :: IO Bool -> IO ()
+myWhile action = action >>= 
+    \x -> if(x)
+            then myWhile action
+            else return ()
+
 myLift :: (a -> b) -> (IO a -> IO b)
 myLift fn = \x -> x >>= 
                 \y -> return (fn y)

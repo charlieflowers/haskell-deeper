@@ -4,6 +4,12 @@ module Print3Flipped where
 import Text.Read
 import Data.Char
 
+myLift :: (a -> b) -> (IO a -> IO b)
+myLift fn = \x -> x >>= 
+                \y -> return (fn y)
+
+printLenOfIOText = myLift (length :: String -> Int)
+
 fiveGetLines = replicate 5 getLine
 
 shoutFold :: IO String -> [IO String] -> [IO String]
